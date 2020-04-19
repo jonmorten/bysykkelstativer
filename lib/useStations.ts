@@ -10,7 +10,7 @@ const API_BASE = "https://gbfs.urbansharing.com/oslobysykkel.no";
 
 export const useStations = () => {
   const [error, setError] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [stations, setStations] = React.useState<Station[]>([]);
 
   React.useEffect(() => {
@@ -65,7 +65,8 @@ export const useStations = () => {
                 stationStatus.is_returning === 1,
               name,
             };
-          });
+          })
+          .sort((a, b) => a.name.localeCompare(b.name));
 
         setStations(stationsData);
       } catch (_) {
