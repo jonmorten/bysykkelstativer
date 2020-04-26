@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import { useStations } from "../lib/useStations";
+import Anchor from "../components/Anchor";
 import StationsMap from "../components/StationsMap";
 
 const Container: React.FC = ({ children }) => (
@@ -23,9 +24,7 @@ const MapPage = () => {
         <>
           <p className="mb-2">
             <Link href="/">
-              <a className="text-blue-500 hover:text-blue-800">
-                Se stativer som liste
-              </a>
+              <Anchor>Se stativer som liste</Anchor>
             </Link>
           </p>
 
