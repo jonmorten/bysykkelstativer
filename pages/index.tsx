@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 import { Station } from "../types";
 import { useStations } from "../lib/useStations";
@@ -82,7 +83,19 @@ const IndexPage = () => {
 
       {loading && <p>Henter info om stativene ...</p>}
 
-      {!loading && !error && <StationList stations={stations} />}
+      {!loading && !error && (
+        <>
+          <p className="mb-2">
+            <Link href="/map">
+              <a className="text-blue-500 hover:text-blue-800">
+                Se stativer på kart
+              </a>
+            </Link>
+          </p>
+
+          <StationList stations={stations} />
+        </>
+      )}
     </Container>
   );
 };

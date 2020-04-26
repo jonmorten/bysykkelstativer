@@ -6,11 +6,15 @@ export type Station = {
   bikesAvailable: number;
   docksAvailable: number;
   inService: boolean;
+  lat: number;
+  lon: number;
   name: string;
 };
 
-type ApiStationInfo = {
+export type ApiStationInfo = {
   address: string;
+  lat: number;
+  lon: number;
   name: string;
   station_id: string;
 };

@@ -1,0 +1,12 @@
+
+/*
+  Override Mapbox styles.
+  Make the popup look better, with more spacing around the "X" close button.
+*/
+.mapboxgl-popup-content {
+  padding: 20px 30px 20px 25px !important;
+}
+.mapboxgl-popup-close-button {
+  height: 30px !important;
+  width: 30px !important;
+}

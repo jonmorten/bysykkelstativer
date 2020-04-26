@@ -2,6 +2,7 @@ describe("List of stations", () => {
   it("Loads", () => {
     cy.visit("/");
     cy.contains("Bysykkelstativer");
+    cy.contains("Se stativer på kart");
   });
 
   describe("Filters the list", () => {

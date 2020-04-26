@@ -1,10 +1,13 @@
 import React from "react";
 
 import {
+  ApiStationInfo,
   ApiStationInfoResponse,
   ApiStationStatusResponse,
   Station,
 } from "../types";
+
+type StationInfo = Pick<ApiStationInfo, "address" | "lat" | "lon" | "name">;
 
 const API_BASE = "https://gbfs.urbansharing.com/oslobysykkel.no";
 
@@ -40,11 +43,13 @@ export const useStations = () => {
         const information = informationRes.data.stations;
         const status = statusRes.data.stations;
 
-        const infoMap = new Map<string, { address: string; name: string }>();
+        const infoMap = new Map<string, StationInfo>();
 
-        information.forEach(({ address, name, station_id }) => {
+        information.forEach(({ address, name, lat, lon, station_id }) => {
           infoMap.set(station_id, {
             address,
+            lat,
+            lon,
             name,
           });
         });
@@ -52,17 +57,21 @@ export const useStations = () => {
         const stationsData = status
           .filter(({ station_id }) => infoMap.has(station_id))
           .map((stationStatus) => {
-            const { address, name } = infoMap.get(stationStatus.station_id);
+            const { address, lat, lon, name } = infoMap.get(
+              stationStatus.station_id
+            );
 
             return {
-              id: stationStatus.station_id,
               address,
               bikesAvailable: stationStatus.num_bikes_available,
               docksAvailable: stationStatus.num_docks_available,
+              id: stationStatus.station_id,
               inService:
                 stationStatus.is_installed === 1 &&
                 stationStatus.is_renting === 1 &&
                 stationStatus.is_returning === 1,
+              lat,
+              lon,
               name,
             };
           })
